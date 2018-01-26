@@ -72,7 +72,7 @@ function levenshteinSubstr(s: string, t: string, maxEdits: number) {
 function getSimilarityIndex(s: string, t: string, maxEdits: number) {
     const dist = levenshteinSubstr(s, t, maxEdits);
     let minLength = s.length > t.length ? t.length : s.length;
-    return (minLength === 0) ? 1 : 1 - dist / minLength;
+    return (minLength === 0) ? 1 : Math.max(0, 1 - dist / minLength);
 }
 
 class SpeechRecognizerTest extends React.Component<any, State> {
@@ -172,7 +172,7 @@ class SpeechRecognizerTest extends React.Component<any, State> {
                 // }
                 // console.log({ searchResults });
             });
-            annyang.start({ continuous: true, autoRestart: true });
+            annyang.start({ continuous: false, autoRestart: true });
             console.log('componentDidMount');
             // SpeechKITT.annyang();
             // SpeechKITT.setStylesheet(SpeechKITTCss);
